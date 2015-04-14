@@ -1,0 +1,13 @@
+{
+  "encrypt": true,
+  "timeformat": "%Y-%m-%d %H:%M",
+  "default_hour": 9,
+  "highlight": true,
+  "journals": {
+    "default": "/home/caleb/journal.txt"
+  },
+  "editor": "vim",
+  "linewrap": 79,
+  "tagsymbols": "@",
+  "default_minute": 0
+}
