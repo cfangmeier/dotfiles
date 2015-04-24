@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 
 export DEFAULT_USER="caleb"
 export KEYTIMEOUT=1
@@ -26,7 +26,7 @@ export KEYTIMEOUT=1
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -48,7 +48,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras pip cp vi-mode catimg z)
+# plugins=(git git-extras cp vi-mode catimg z)
+plugins=(git git-extras cp vi-mode catimg z)
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -61,18 +62,10 @@ source $ZSH/oh-my-zsh.sh
 eval `dircolors ~/.dircolors`
 
 export PATH=$HOME/bin:$PATH
-export PYTHONPATH="/usr/lib/python3.4/site-packages/":$PYTHONPATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -88,19 +81,16 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-alias du="du -h --max-depth=1"
-alias dus="du -h --max-depth=1 | sort -h"
+alias du="du -h --max-depth=1 | sort -h"
 
 
-export LS_OPTIONS='--color'
-alias l='ls $LS_OPTIONS'
-alias ll='ls $LS_OPTIONS -lh'
-alias lll='ls $LS_OPTIONS -alh'
-alias sl='ls $LS_OPTIONS' # often screw this up
+alias l='ls'
+alias ll='ls -lh'
+alias lll='ls -alh'
+alias sl='ls' # often screw this up
 
 alias t="vim ~/Dropbox/todo.txt"
 alias c="clear"
-#alias ipython="ptipython --vi"
 
 alias top="htop"
 alias vi="nvim"
@@ -110,6 +100,9 @@ alias quartus="quartus --64bit"
 alias lsF="ls | pyp \"sorted(pp, key = lambda x: x.split('.')[-1])\""
 alias qtpython="ipython qtconsole"
 alias sshHTPC="ssh caleb@192.168.254.6"
+alias vimdiff="nvim -d"
+alias touchoff="xinput disable ELAN\ Touchscreen"
+alias touchon="xinput enable ELAN\ Touchscreen"
 
 #list post-aliases here
 alias -s pdf=evince
@@ -120,12 +113,6 @@ alias -s doc=libreoffice
 alias -s docx=libreoffice
 alias -s xls=libreoffice
 
-# Make a safe rm
-del () { mkdir -p /tmp/wastebasket ;mv $* /tmp/wastebasket }
-delc () { mkdir -p /tmp/wastebasket ;rm -rf /tmp/wastebasket/* }
-
-cl () {clear && cd $* && ls }
-
 cowfortune() {
   f=/tmp/cowsaytemp
   fortune | cowsay -f stegosaurus -W 80 > $f
@@ -135,7 +122,5 @@ cowfortune() {
   }
 cowfortune
 
-
 # Fix italics in vim
 export TERM=xterm-256color-italic
-
