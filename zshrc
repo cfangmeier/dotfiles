@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="admiralswan"
 
 export DEFAULT_USER="caleb"
 export KEYTIMEOUT=1
@@ -65,10 +65,10 @@ export PATH=$HOME/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
@@ -93,7 +93,7 @@ alias t="vim ~/Dropbox/todo.txt"
 alias c="clear"
 
 alias top="htop"
-alias vi="nvim"
+alias v="nvim"
 alias vim="nvim"
 alias quartus="quartus --64bit"
 
@@ -113,6 +113,11 @@ alias -s doc=libreoffice
 alias -s docx=libreoffice
 alias -s xls=libreoffice
 
+
+bindkey -v
+bindkey '\e[3~' delete-char
+bindkey '^R' history-incremental-search-backward
+
 cowfortune() {
   f=/tmp/cowsaytemp
   fortune | cowsay -f stegosaurus -W 80 > $f
@@ -120,7 +125,7 @@ cowfortune() {
   head -$N $f
   tail -14 $f | toilet -f term --termwidth --gay
   }
-cowfortune
 
 # Fix italics in vim
 export TERM=xterm-256color-italic
+cowfortune

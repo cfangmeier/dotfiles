@@ -106,3 +106,6 @@ nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "" Tagbar setup 
 nmap <F8> :TagbarToggle<CR>
+
+"" Custom Mappings
+nnoremap Q @q
