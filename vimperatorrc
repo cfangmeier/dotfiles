@@ -1,0 +1,9 @@
+" 'normal' copying and pasting
+nmap <C-c> <C-v><C-c>
+nmap <C-v> <C-v><C-v>
+nmap <C-x> <C-v><C-x>
+
+" Insert Mode Mappings
+imap <C-c> <C-v><C-c>
+imap <C-v> <C-v><C-v>
+imap <C-x> <C-v><C-x>

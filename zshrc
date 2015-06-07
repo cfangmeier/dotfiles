@@ -26,7 +26,7 @@ export KEYTIMEOUT=1
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -101,8 +101,13 @@ alias lsF="ls | pyp \"sorted(pp, key = lambda x: x.split('.')[-1])\""
 alias qtpython="ipython qtconsole"
 alias sshHTPC="ssh caleb@192.168.254.6"
 alias vimdiff="nvim -d"
+alias view="nvim -R"
 alias touchoff="xinput disable ELAN\ Touchscreen"
 alias touchon="xinput enable ELAN\ Touchscreen"
+
+
+# Find files that don't contain Ampl
+#find . -type f | xargs grep -H -c 'Ampl' | grep 0$ | cut -d':' -f1
 
 #list post-aliases here
 alias -s pdf=evince

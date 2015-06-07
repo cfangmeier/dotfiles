@@ -23,11 +23,13 @@ Plugin 'benekastah/neomake'
 Plugin 'majutsushi/tagbar'
 Plugin 'rust-lang/rust.vim'
 Plugin 'cespare/vim-toml'
+Plugin 'mikewest/vimroom'
 
 call vundle#end()
 
 set list                            " show whitespace
 set smartcase                       " Enable smartcase in search
+set nottimeout                      " Fix problem with <ESC>+<char>
 set autowrite                       " Write automatically when switching buffers
 set hlsearch                        " Highlight search matches
 set title                           " Set terminal title
@@ -36,7 +38,7 @@ set number                          " show line number
 set relativenumber                  " line numbering is relative to current line
 set ts=2                            " tab spacing is 2 characters
 set mouse=a                         " Enable all mouse features
-set clipboard+=unnamedplus          " Set default yank register to use desktop copy/paste
+" set clipboard+=unnamedplus          " Set default yank register to use desktop copy/paste
 filetype plugin indent on           " Enable file-specific plugins and indents
 syntax enable                       " Set syntax highlighting on 
 set background=dark                 " Set background to dark(for solarized)
@@ -71,6 +73,25 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
+"" vim-latex setup
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_CompileRule_pdf = 'arara -v $*'
+" let g:Tex_CompileRule_pdf = 'xelatex -src-specials -synctex=1 -interaction=nonstopmode $*'
+
+"" Neomake Setup
+autocmd! BufWritePost * Neomake
+
+"" YouCompleteMe Setup
+let g:ycm_autoclose_preview_window_after_completion=1
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"" Tagbar setup 
+nmap <F8> :TagbarToggle<CR>
+
+"" VimRoom setup
+let g:vimroom_sidebar_height=0
+
 "" alt key view switching
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -92,20 +113,12 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-"" vim-latex setup
-let g:tex_flavor='latex'
-let g:Tex_CompileRule_pdf = 'xelatex -src-specials -synctex=1 -interaction=nonstopmode $*'
-let g:Tex_DefaultTargetFormat = 'pdf'
-
-"" Neomake Setup
-autocmd! BufWritePost * Neomake
-
-"" YouCompleteMe Setup
-let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-"" Tagbar setup 
-nmap <F8> :TagbarToggle<CR>
 
 "" Custom Mappings
 nnoremap Q @q
+
+" A map that reverses a visual selection
+vmap <Leader>fR c<C-O>:set ri<CR><C-R>"<Esc>:set nori<CR>
+" A map that reverses the sequence of lines (again, visual mode):
+vmap <Leader>fr :<c-u>set lz<CR>'>o<Esc>'<O<Esc>V'>j:<c-u>'<+1,'>-1g/^/m '<<CR>' dd:set nolz<CR>
+

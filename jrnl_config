@@ -6,7 +6,7 @@
   "journals": {
     "default": "/home/caleb/journal.txt"
   },
-  "editor": "vim",
+  "editor": "nvim",
   "linewrap": 79,
   "tagsymbols": "@",
   "default_minute": 0
