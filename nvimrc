@@ -15,12 +15,15 @@ Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-sensible'
 Plugin 'godlygeek/tabular'
 Plugin 'bling/vim-airline'
+Plugin 'ntpeters/vim-airline-colornum'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-latex/vim-latex'
+Plugin 'szw/vim-ctrlspace' 
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'whatyouhide/vim-gotham'
 Plugin 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
 Plugin 'benekastah/neomake'
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 Plugin 'rust-lang/rust.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'mikewest/vimroom'
@@ -28,6 +31,7 @@ Plugin 'mikewest/vimroom'
 call vundle#end()
 
 set list                            " show whitespace
+set hidden
 set smartcase                       " Enable smartcase in search
 set nottimeout                      " Fix problem with <ESC>+<char>
 set autowrite                       " Write automatically when switching buffers
@@ -35,15 +39,15 @@ set hlsearch                        " Highlight search matches
 set title                           " Set terminal title
 set showmatch                       " Show matching paren/brace/bracket etc.
 set number                          " show line number
-set relativenumber                  " line numbering is relative to current line
+" set relativenumber                  " line numbering is relative to current line
 set ts=2                            " tab spacing is 2 characters
 set mouse=a                         " Enable all mouse features
 " set clipboard+=unnamedplus          " Set default yank register to use desktop copy/paste
 filetype plugin indent on           " Enable file-specific plugins and indents
 syntax enable                       " Set syntax highlighting on 
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Set thin cursor in insert mode
 set background=dark                 " Set background to dark(for solarized)
 colorscheme solarized               " Set colorscheme to solarized
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Set thin cursor in insert mode
 
 
 " Setup persistent undo
@@ -59,25 +63,10 @@ set directory=$HOME/.nvim/backup " for .swp files
 "" Airline setup
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#buffer_idx_mode = 1 " move between tabs:
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
 
-"" vim-latex setup
-let g:tex_flavor='latex'
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_CompileRule_pdf = 'arara -v $*'
-" let g:Tex_CompileRule_pdf = 'xelatex -src-specials -synctex=1 -interaction=nonstopmode $*'
+"" LaTeX Box Setup
+let g:LatexBox_latexmk_async=1
+let g:LatexBox_build_dir="./build/"
 
 "" Neomake Setup
 autocmd! BufWritePost * Neomake
@@ -87,10 +76,13 @@ let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "" Tagbar setup 
-nmap <F8> :TagbarToggle<CR>
+" nmap <F8> :TagbarToggle<CR>
 
 "" VimRoom setup
 let g:vimroom_sidebar_height=0
+
+"" CtrlSpace Setup
+let g:CtrlSpaceFileEngine = "auto"
 
 "" alt key view switching
 tnoremap <A-h> <C-\><C-n><C-w>h

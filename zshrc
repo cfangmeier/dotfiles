@@ -48,8 +48,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git git-extras cp vi-mode catimg z)
-plugins=(git git-extras cp vi-mode catimg z)
+plugins=(git git-extras cp vi-mode catimg z zsh-history-substring-search zsh-syntax-highlighting archlinux python)
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -62,6 +61,7 @@ source $ZSH/oh-my-zsh.sh
 eval `dircolors ~/.dircolors`
 
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/Sources/Small/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -82,7 +82,15 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 alias du="du -h --max-depth=1 | sort -h"
+alias rsync="rsync -avz"
 
+packillorphans() {
+  if [[ ! -n $(pacman -Qdt) ]]; then
+    echo "No orphans to remove."
+  else
+    sudo pacman -Rns $(pacman -Qdtq)
+  fi
+}
 
 alias l='ls'
 alias ll='ls -lh'
@@ -99,11 +107,14 @@ alias quartus="quartus --64bit"
 
 alias lsF="ls | pyp \"sorted(pp, key = lambda x: x.split('.')[-1])\""
 alias qtpython="ipython qtconsole"
-alias sshHTPC="ssh caleb@192.168.254.6"
 alias vimdiff="nvim -d"
 alias view="nvim -R"
 alias touchoff="xinput disable ELAN\ Touchscreen"
 alias touchon="xinput enable ELAN\ Touchscreen"
+
+alias sshHTPC="ssh caleb@192.168.254.1"
+alias sshsilpix="ssh -Y silpix5@silpix5.unl.edu"
+alias sshcosmic="ssh -Y husker@phys-cosmicstation.unl.edu"
 
 
 # Find files that don't contain Ampl
@@ -111,6 +122,7 @@ alias touchon="xinput enable ELAN\ Touchscreen"
 
 #list post-aliases here
 alias -s pdf=evince
+alias -s ps=evince
 alias -s png=eog
 alias -s jpg=eog
 alias -s jpeg=eog
