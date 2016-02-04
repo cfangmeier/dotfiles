@@ -73,6 +73,10 @@ export ARCHFLAGS="-arch x86_64"
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+#Setup Python junk
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/bin/virtualenvwrapper_lazy.sh
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -92,13 +96,14 @@ packillorphans() {
   fi
 }
 
-alias l='ls'
-alias ll='ls -lh'
-alias lll='ls -alh'
-alias sl='ls' # often screw this up
+alias l=' ls'
+alias ll=' ls -lh'
+alias lll=' ls -alh'
+alias sl=' ls' # often screw this up
 
 alias t="vim ~/Dropbox/todo.txt"
-alias c="clear"
+alias c=" clear"
+alias r="ranger"
 
 alias top="htop"
 alias v="nvim"
@@ -116,9 +121,32 @@ alias sshHTPC="ssh caleb@192.168.254.1"
 alias sshsilpix="ssh -Y silpix5@silpix5.unl.edu"
 alias sshcosmic="ssh -Y husker@phys-cosmicstation.unl.edu"
 
+source ~/.passwords
+ssht3() {
+  echo $UNL_T3 | clipcopy
+  ssh  -Y cfangmeier@t3.unl.edu
+  }
+
+sshfnal() {
+  echo $FNAL_LPC | clipcopy
+  kinit cfangmei@FNAL.GOV
+  ssh -Y cfangmei@cmslpc-sl6.fnal.gov
+  }
+
+sshlxplus() {
+  echo $CERN_LXPLUS | clipcopy
+  ssh -Y cfangmei@lxplus.cern.ch
+  }
+
+sshgimli () {
+  scp -q "husker@phys-cosmicstation.unl.edu:ip_gimli.txt" /tmp/ip_gimli.txt
+	ssh -Y caleb@$(cat /tmp/ip_gimli.txt)
+	}
 
 # Find files that don't contain Ampl
 #find . -type f | xargs grep -H -c 'Ampl' | grep 0$ | cut -d':' -f1
+# Example script to extract pages from a pdf
+# gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=11 -dLastPage=13 -sOutputFile=outfile_p11-p13.pdf DAQCard2015V01.pdf
 
 #list post-aliases here
 alias -s pdf=evince
@@ -144,5 +172,5 @@ cowfortune() {
   }
 
 # Fix italics in vim
-export TERM=xterm-256color-italic
+# export TERM=xterm-256color-italic
 cowfortune
