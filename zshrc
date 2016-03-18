@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="admiralswan"
+ZSH_THEME="kennethreitz"
 
 export DEFAULT_USER="caleb"
 export KEYTIMEOUT=1
@@ -117,31 +117,46 @@ alias view="nvim -R"
 alias touchoff="xinput disable ELAN\ Touchscreen"
 alias touchon="xinput enable ELAN\ Touchscreen"
 
-alias sshHTPC="ssh caleb@192.168.254.1"
+alias sshHTPC="ssh -Y caleb@192.168.254.1"
 alias sshsilpix="ssh -Y silpix5@silpix5.unl.edu"
 alias sshcosmic="ssh -Y husker@phys-cosmicstation.unl.edu"
 
 source ~/.passwords
-ssht3() {
+ssht3(){
   echo $UNL_T3 | clipcopy
   ssh  -Y cfangmeier@t3.unl.edu
-  }
+}
 
-sshfnal() {
+sshfnal(){
   echo $FNAL_LPC | clipcopy
   kinit cfangmei@FNAL.GOV
   ssh -Y cfangmei@cmslpc-sl6.fnal.gov
-  }
+}
 
-sshlxplus() {
+sshlxplus(){
   echo $CERN_LXPLUS | clipcopy
   ssh -Y cfangmei@lxplus.cern.ch
-  }
+}
 
-sshgimli () {
+scptogimli(){
   scp -q "husker@phys-cosmicstation.unl.edu:ip_gimli.txt" /tmp/ip_gimli.txt
-	ssh -Y caleb@$(cat /tmp/ip_gimli.txt)
-	}
+  scp $1 caleb@$(cat /tmp/ip_gimli.txt):$2
+}
+
+scpfromgimli(){
+  scp -q "husker@phys-cosmicstation.unl.edu:ip_gimli.txt" /tmp/ip_gimli.txt
+  scp caleb@$(cat /tmp/ip_gimli.txt):$1 $2
+}
+
+sshgimli(){
+  scp -q "husker@phys-cosmicstation.unl.edu:ip_gimli.txt" /tmp/ip_gimli.txt
+  ssh -Y caleb@$(cat /tmp/ip_gimli.txt)
+}
+
+gimliip(){
+  scp -q "husker@phys-cosmicstation.unl.edu:ip_gimli.txt" /tmp/ip_gimli.txt
+  cat /tmp/ip_gimli.txt
+}
 
 # Find files that don't contain Ampl
 #find . -type f | xargs grep -H -c 'Ampl' | grep 0$ | cut -d':' -f1
