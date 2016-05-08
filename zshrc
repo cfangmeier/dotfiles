@@ -1,3 +1,5 @@
+# If prompt is non-interactive, do nothing
+[ -z "$PS1" ] && return
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -5,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="kennethreitz"
+# ZSH_THEME="kennethreitz"
+ZSH_THEME="bureau"
 
 export DEFAULT_USER="caleb"
 export KEYTIMEOUT=1
@@ -48,7 +51,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras cp vi-mode catimg z zsh-history-substring-search zsh-syntax-highlighting archlinux python)
+plugins=(git git-extras cp vi-mode z zsh-history-substring-search zsh-syntax-highlighting archlinux python thefuck)
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -120,11 +123,12 @@ alias touchon="xinput enable ELAN\ Touchscreen"
 alias sshHTPC="ssh -Y caleb@192.168.254.1"
 alias sshsilpix="ssh -Y silpix5@silpix5.unl.edu"
 alias sshcosmic="ssh -Y husker@phys-cosmicstation.unl.edu"
+alias openPorts="sudo lsof -i -n | egrep \'\<ssh\>\'"
 
 source ~/.passwords
 ssht3(){
   echo $UNL_T3 | clipcopy
-  ssh  -Y cfangmeier@t3.unl.edu
+  ssh  -Y cfangmeier@t3.unl.edu $1
 }
 
 sshfnal(){
@@ -169,9 +173,10 @@ alias -s ps=evince
 alias -s png=eog
 alias -s jpg=eog
 alias -s jpeg=eog
-alias -s doc=libreoffice
-alias -s docx=libreoffice
-alias -s xls=libreoffice
+alias -s doc="GDK_BACKEND=x11 libreoffice"
+alias -s docx="GDK_BACKEND=x11 libreoffice"
+alias -s xls="GDK_BACKEND=x11 libreoffice"
+alias -s xlsx="GDK_BACKEND=x11 libreoffice"
 
 
 bindkey -v

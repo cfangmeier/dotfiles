@@ -27,9 +27,10 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
 Plugin 'vim-scripts/ReplaceWithRegister'
+
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'whatyouhide/vim-gotham'
-
 Plugin 'Lokaltog/vim-distinguished'
 
 call vundle#end()
@@ -50,11 +51,22 @@ set foldlevel=99                            " Bigtime folding for great fun!
 filetype plugin indent on                   " Enable file-specific plugins and indents
 syntax enable                               " Set syntax highlighting on
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1         " Set thin cursor in insert mode
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1           " Enable true color support in terminal
 
-set t_Co=256
-set background=dark                  " Set background
-colorscheme distinguished                " Set colorscheme to solarized
+set background=dark                         " Set background
+colorscheme PaperColor
 
+
+" Neovim-qt Guifont command
+command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
+" Guifont Luxi Mono:h8
+" Guifont DejaVu Sans Mono:h10
+" Guifont Nimbus Mono:h10
+" Guifont Source Code Pro for Powerline:h10
+" Guifont Anonymous Pro for Powerline:h10
+command! -nargs=? GoTiny Guifont Source Code Pro for Powerline:h4
+command! -nargs=? GoSmall Guifont Source Code Pro for Powerline:h6
+command! -nargs=? GoBig Guifont Source Code Pro for Powerline:h10
 
 " Setup persistent undo
 set undofile
@@ -68,8 +80,8 @@ set directory=$HOME/.config/nvim/backup " for .swp files
 
 "" Airline setup
 set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_theme='distinguished'
+let g:airline_powerline_fonts = 0
+let g:airline_theme='papercolor'
 let g:airline_inactive_collapse=1
 let g:airline_mode_map = {
         \ '__' : '-',
